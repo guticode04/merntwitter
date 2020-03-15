@@ -12,8 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
+const passport = require("passport");
 
-app.get("/", (req, res) => res.send("Hello"));
+// app.get("/", (req, res) => res.send("Hello"));
+app.use(passport.initialize());
+require("./config/passport")(passport);
+
 app.use("/api/users", users);
 app.use("/api/tweets", tweets);
 const port = process.env.PORT || 5000;
